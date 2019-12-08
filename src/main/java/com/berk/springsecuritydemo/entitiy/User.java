@@ -3,12 +3,14 @@ package com.berk.springsecuritydemo.entitiy;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.sun.istack.NotNull;
 
 @Entity
 public class User {
@@ -16,11 +18,20 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
+
+	@NotNull
 	private String firstName;
-	
+
+	@NotNull
 	private String latsName;
-	
+
+	@Column(unique = true)
+	@NotNull
+	private String email;
+
+	@NotNull
+	private String password;
+
 	@ManyToMany
 	private Set<Role> roles;
 
@@ -55,9 +66,21 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
-	
-	
-	
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 }
